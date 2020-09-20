@@ -1,0 +1,65 @@
+@use "../../global/mixins";
+$gray: #2e3945;
+$md-size: 992px;
+
+.launch-item {
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  padding: 15px;
+  background-color: $gray;
+  margin-bottom: 30px;
+  border-radius: 10px;
+
+  &:first-child {
+    margin-top: 10px;
+  }
+
+  h4 {
+    letter-spacing: 1px;
+    margin: 0px;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    padding: 7px 16px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-left: 50px;
+    text-align: center;
+    display: block;
+    width: auto;
+  }
+}
+
+@media screen and (min-width: $md-size) {
+  .launch-item {
+    width: $md-size;
+  }
+}
+
+.row-between {
+  width: 100%;
+  height: auto;
+  @include mixins.flex-between;
+}
+
+.mission-name {
+  letter-spacing: 1px;
+
+  &--success {
+    color: #43a047;
+  }
+
+  &--failure {
+    color: #ff3d00;
+  }
+}
+
+.date {
+  color: lightgray;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
