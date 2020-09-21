@@ -24,9 +24,7 @@ const LAUNCH_QUERY = gql`
 `;
 
 const Launch = () => {
-  useEffect(() => {
-    console.log("MOUNTED");
-  });
+  useEffect(() => {});
 
   let { flight_number } = useParams();
   flight_number = parseInt(flight_number);

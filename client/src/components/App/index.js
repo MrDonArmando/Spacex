@@ -15,7 +15,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="container-full pd-all-20">
+        <div
+          className="container-full pd-all-20"
+          onScroll={() => console.log("SCROLLING..........")}
+        >
           <img
             src={logo}
             alt="SpaceX"

@@ -1,5 +1,6 @@
 body {
   margin: 0px;
+  overflow: auto;
 }
 
 * {
@@ -7,4 +8,6 @@ body {
   font-family: "Roboto", sans-serif;
   color: white;
   margin: 0px;
+  padding: 0px;
+  list-style-type: none;
 }

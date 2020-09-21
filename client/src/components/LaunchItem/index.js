@@ -4,6 +4,7 @@ import "./index.scss";
 import "../../global/index.scss";
 
 const LaunchItem = ({
+  lastLaunchItemRef,
   launch: {
     flight_number,
     mission_name,
@@ -14,7 +15,10 @@ const LaunchItem = ({
   },
 }) => {
   return (
-    <div className="launch-item">
+    <li
+      className="launch-item"
+      {...(lastLaunchItemRef ? { ref: lastLaunchItemRef } : {})}
+    >
       <div className="row-between">
         <h4>
           Mission:{" "}
@@ -43,7 +47,7 @@ const LaunchItem = ({
       <div className="row-between">
         <span className="date">Time: {launch_date_local.slice(11, 19)}</span>
       </div>
-    </div>
+    </li>
   );
 };
 

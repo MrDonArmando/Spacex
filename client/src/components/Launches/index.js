@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { useEffect, useCallback, useRef } from "react";
+import { useQuery, gql, NetworkStatus } from "@apollo/client";
 import LaunchItem from "../LaunchItem";
 import "./index.scss";
 import "../../global/index.scss";
 import Loader from "../Loader";
 
 const LAUNCHES_QUERY = gql`
-  query LaunchesQuery {
-    launches {
+  query LaunchesQuery($limit: Int, $offset: Int) {
+    launches(limit: $limit, offset: $offset) {
       flight_number
       mission_name
       launch_success
@@ -19,19 +19,75 @@ const LAUNCHES_QUERY = gql`
 `;
 
 const Launches = () => {
-  const { loading, error, data } = useQuery(LAUNCHES_QUERY);
+  const { loading, error, data, fetchMore, networkStatus } = useQuery(
+    LAUNCHES_QUERY,
+    {
+      variables: {
+        offset: 0,
+        limit: 10,
+      },
+      notifyOnNetworkStatusChange: false,
+      fetchPolicy: "cache-first",
+    }
+  );
+
+  useEffect(() => {
+    console.log("REMOUNTED");
+  });
+
+  function loadMore() {
+    //console.log("DATA LENGTH: ", data.launches.length);
+    fetchMore({
+      variables: {
+        offset: data.launches.length,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        // console.log("fetchMoreResult: ", fetchMoreResult);
+        // console.log("prev: ", prev);
+        if (!fetchMoreResult) return prev;
+        return Object.assign({}, prev, {
+          launches: [...prev.launches, ...fetchMoreResult.launches],
+        });
+      },
+    });
+  }
+
+  const observer = useRef();
+
+  const lastLaunchItemRef = useCallback(
+    (node) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [data]
+  );
 
   if (loading) return <Loader />;
   if (error) return "Error :(";
 
-  console.log("LANUCHES: ", data);
-
   return (
-    <div className="container-md container-flex-row-wrap mg-auto">
-      {data.launches.map((launch) => (
-        <LaunchItem key={launch.flight_number} launch={launch} />
-      ))}
-    </div>
+    <ul
+      className="container-md container-flex-row-wrap mg-auto"
+      onScroll={() => console.log("SCROLLING..........")}
+    >
+      {/* <button onClick={loadMore}>Load more</button> */}
+      {data.launches.map((launch, index) => {
+        if (index + 1 === data.launches.length)
+          return (
+            <LaunchItem
+              lastLaunchItemRef={lastLaunchItemRef}
+              key={launch.flight_number}
+              launch={launch}
+            />
+          );
+        return <LaunchItem key={launch.flight_number} launch={launch} />;
+      })}
+    </ul>
   );
 };
 
