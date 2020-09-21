@@ -1,42 +1,23 @@
 @use "../../global/mixins";
-$gray: #2e3945;
-$md-size: 992px;
+@use "../../global/bp";
+@use "../../global/colors";
 
 .launch-item {
   width: 100%;
   height: auto;
   min-height: 100px;
   padding: 15px;
-  background-color: $gray;
+  background-color: colors.$gray;
   margin-bottom: 30px;
   border-radius: 10px;
 
   &:first-child {
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
   h4 {
     letter-spacing: 1px;
     margin: 0px;
-  }
-
-  a {
-    text-decoration: none;
-    color: white;
-    font-family: "Roboto", sans-serif;
-    padding: 7px 16px;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    margin-left: 50px;
-    text-align: center;
-    display: block;
-    width: auto;
-  }
-}
-
-@media screen and (min-width: $md-size) {
-  .launch-item {
-    width: $md-size;
   }
 }
 
@@ -48,6 +29,10 @@ $md-size: 992px;
 
 .mission-name {
   letter-spacing: 1px;
+
+  &--future {
+    color: lightgray;
+  }
 
   &--success {
     color: #43a047;

@@ -9,3 +9,9 @@
   justify-content: space-between;
   align-items: center;
 }
+
+@mixin media($width) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}

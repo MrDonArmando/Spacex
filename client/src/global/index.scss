@@ -1,0 +1,86 @@
+@use "./colors";
+@use "./mixins";
+
+.container-full {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background-color: colors.$darkBG;
+}
+
+.container-flex-row-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.container-md {
+  width: 100%;
+  height: auto;
+
+  @media screen and (min-width: 992px) {
+    width: 952px;
+  }
+}
+
+.flex-center {
+  @include mixins.flex-center;
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  padding: 7px 16px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  text-align: center;
+  display: block;
+  width: auto;
+}
+
+.pd-all-20 {
+  padding: 20px;
+}
+
+.pd-all-15 {
+  padding: 15px;
+}
+
+.mg-auto {
+  margin: 0 auto;
+}
+
+.mg-top-20 {
+  margin-top: 20px;
+}
+
+.mg-top-10 {
+  margin-top: 10px;
+}
+
+.mg-left-50 {
+  margin-left: 50px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.bg-gray {
+  background-color: colors.$gray;
+}
+
+.block {
+  display: block;
+}
+
+.font-lightgray {
+  color: lightgray;
+}
+
+.font-white {
+  color: white;
+}

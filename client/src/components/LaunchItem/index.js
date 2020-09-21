@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./index.scss";
+import "../../global/index.scss";
 
 const LaunchItem = ({
   launch: {
@@ -19,14 +20,20 @@ const LaunchItem = ({
           Mission:{" "}
           <span
             className={`mission-name ${
-              launch_success ? "mission-name--success" : "mission-name--failure"
+              launch_success === null
+                ? "mission-name--future"
+                : launch_success
+                ? "mission-name--success"
+                : "mission-name--failure"
             }`}
           >
             {" "}
             {mission_name}
           </span>
         </h4>
-        <Link to={`/launch/${flight_number}`}>Launch Details</Link>
+        <Link className="btn mg-left-50" to={`/launch/${flight_number}`}>
+          Launch Details
+        </Link>
       </div>
 
       <div className="row-between">
