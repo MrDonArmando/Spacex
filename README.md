@@ -1,3 +1,3 @@
 ## Welcome to Spacex
 
-## App is available here https://minesweepergamesaper.herokuapp.com/
+## App is available here https://graphql-apollo-spacex-app.herokuapp.com/
